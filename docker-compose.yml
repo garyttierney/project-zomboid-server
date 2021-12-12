@@ -1,0 +1,35 @@
+version: '2.1'
+
+networks:
+  pz-net:
+
+services:
+  pz_32:
+    image: zomboid
+    ports:
+      - "8766:8766"
+      - "16261:16261"
+    restart: unless-stopped
+    volumes:
+      - ./data/pz_logs:/home/zomboid-server/Zomboid/Logs
+      - ./data/pz_saves:/home/zomboid-server/Zomboid/Saves
+      - ./data/pz_db:/home/zomboid-server/Zomboid/db
+      - ./data/pz_stats:/home/zomboid-server/Zomboid/Statistic
+    environment:
+      - ZOMBOID_MOTD=${ZOMBOID_MOTD:-Welcome to Project Zomboid}
+      - ZOMBOID_PVP=${ZOMBOID_PVP:-false}
+      - ZOMBOID_LOG_CHAT=${ZOMBOID_LOG_CHAT:-true}
+      - ZOMBOID_ALLOW_SIGNUPS=${ZOMBOID_ALLOW_SIGNUPS:-true}
+      - ZOMBOID_MAX_PLAYERS=${ZOMBOID_MAX_PLAYERS:-32}
+      - ZOMBOID_DEATH_ANNOUNCEMENT_ENABLED=${ZOMBOID_DEATH_ANNOUNCEMENT_ENABLED:-true}
+      - ZOMBOID_RCON_PASSWORD=${ZOMBOID_RCON_PASSWORD}
+      - ZOMBOID_ADMIN_PASSWORD=${ZOMBOID_ADMIN_PASSWORD}
+      - ZOMBOID_WORKSHOP_ITEMS=${ZOMBOID_WORKSHOP_ITEMS}
+      - ZOMBOID_SANDBOX_XP_MULTIPLIER=${ZOMBOID_SANDBOX_XP_MULTIPLIER:-1.0}
+    expose:
+      - 8766
+      - 16261
+    networks:
+      - pz-net
+    labels:
+      org.label-schema.group: "zomboid"
