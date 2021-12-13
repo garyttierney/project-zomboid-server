@@ -36,6 +36,7 @@ RUN curl -L https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_java
 
 EXPOSE 16261
 EXPOSE 8766
+EXPOSE 9099
 
 WORKDIR /opt/project-zomboid
 ENTRYPOINT ["/bin/sh", "/home/zomboid-server/configure-and-launch-pz"]

@@ -32,6 +32,7 @@ services:
     expose:
       - 8766
       - 16261
+      - 9099
     networks:
       - pz-net
     labels:
