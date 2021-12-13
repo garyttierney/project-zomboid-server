@@ -5,8 +5,9 @@ for config_file in servertest.ini servertest_SandboxVars.lua; do
 done
 
 if [ ! -f "$HOME/Zomboid/db/servertest.db" ]; then
+  mkdir -p "$HOME/Zomboid/db"
   cp "$HOME/Zomboid/db.default/servertest.db" "$HOME/Zomboid/db/servertest.db"
-  if [ ! -z "$ZOMBOID_PASSWORD" ]; then
+  if [ ! -z "$ZOMBOID_ADMIN_PASSWORD" ]; then
     sqlite3 "$HOME/Zomboid/db/servertest.db" "UPDATE whitelist SET password = '$ZOMBOID_PASSWORD', admin = 1 WHERE username = 'admin';"
   fi
 fi
