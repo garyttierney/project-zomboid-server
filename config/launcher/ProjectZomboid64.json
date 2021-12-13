@@ -23,6 +23,7 @@
   ],
   "vmArgs": [
     "-javaagent:/opt/project-zomboid/jmx_prometheus_javaagent.jar=9099:prometheus.yaml",
+    "-javaagent:/opt/project-zomboid/pz-agent.jar",
     "-Djava.awt.headless=true",
     "-Dzomboid.steam=1",
     "-Dzomboid.znetlog=1",

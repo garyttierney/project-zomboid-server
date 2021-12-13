@@ -2,13 +2,15 @@ version: '2.1'
 
 networks:
   pz-net:
+    driver: bridge
 
 services:
   pz_32:
     image: zomboid
     ports:
-      - "8766:8766"
-      - "16261:16261"
+      - "8766:8766/tcp"
+      - "8766:8766/udp"
+      - "16261:16261/udp"
     restart: unless-stopped
     volumes:
       - ./data/pz_logs:/home/zomboid-server/Zomboid/Logs
