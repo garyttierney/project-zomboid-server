@@ -1,0 +1,18 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+commonLabels:
+  app: pz-server
+
+resources:
+  - ../../k8s/base
+
+components:
+  - ../../k8s/variants/48-players
+  - ../../k8s/variants/with-metrics
+
+secretGenerator:
+  - name: pz-server-secrets
+    behavior: merge
+    envs:
+      - secrets.env

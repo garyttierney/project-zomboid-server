@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pz-server-config
+data:
+  ZOMBOID_MOTD: "Project Zomboid Sandbox Server"
+  ZOMBOID_PVP: "false"
+  ZOMBOID_LOG_CHAT: "true"
+  ZOMBOID_ALLOW_SIGNUPS: "true"
+  ZOMBOID_MAX_PLAYERS: "40"
+  ZOMBOID_DEATH_ANNOUNCEMENT_ENABLED: "false"
+  ZOMBOID_WORKSHOP_ITEMS: ""
+  ZOMBOID_SANDBOX_XP_MULTIPLIER: "1.0"
+  ZOMBOID_SERVER_NAME: "Project Zomboid Sandbox Server"
+  ZOMBOID_SERVER_PUBLIC: "true"
+  ZOMBOID_SERVER_DESCRIPTION: "A sandbox server no stress test 32+ player servers"

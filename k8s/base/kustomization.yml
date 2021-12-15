@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+commonLabels:
+  app: pz-server
+
+resources:
+  - pz-server-config.yml
+  - pz-server-secrets.yml
+  - pz-server-service.yml
+  - pz-server-stateful-set.yml

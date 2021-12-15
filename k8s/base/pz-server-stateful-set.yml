@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: pz-server
+spec:
+  selector:
+    matchLabels:
+      app: pz-server
+  serviceName: pz-server
+  replicas: 1
+  updateStrategy:
+    rollingUpdate: {}
+  template:
+    metadata:
+      labels:
+        app: pz-server
+      annotations:
+        prometheus.io/scrape: 'true'
+        prometheus.io/port: '9099'
+    spec:
+      terminationGracePeriodSeconds: 10
+      securityContext:
+        fsGroup: 1000
+      containers:
+        - name: pz-server
+          image: ghcr.io/garyttierney/project-zomboid-server:master
+          securityContext:
+            runAsGroup: 1000
+            runAsUser: 1000
+          envFrom:
+            - configMapRef:
+                name: pz-server-config
+            - secretRef:
+                name: pz-server-secrets
+          ports:
+            - containerPort: 16261
+              name: game-server
+              protocol: UDP
+            - containerPort: 8766
+              name: game-server-2
+              protocol: UDP
+            - containerPort: 9099
+              name: metrics
+              protocol: TCP
+          volumeMounts:
+            - name: data
+              mountPath: /home/zomboid-server/Zomboid/Saves
+              subPath: "Saves"
+            - name: data
+              mountPath: /home/zomboid-server/Zomboid/db
+              subPath: "db"
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        storageClassName: hcloud-volumes
+        resources:
+          requests:
+            storage: 10Gi
+

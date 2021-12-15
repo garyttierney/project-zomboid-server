@@ -1,0 +1,12 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: pz-server-monitor
+  labels:
+    app: pz-server
+spec:
+  selector:
+    matchLabels:
+      app: pz-server
+  podMetricsEndpoints:
+    - port: metrics
