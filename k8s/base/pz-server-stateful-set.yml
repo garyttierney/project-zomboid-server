@@ -24,6 +24,7 @@ spec:
       containers:
         - name: pz-server
           image: ghcr.io/garyttierney/project-zomboid-server:master
+          imagePullPolicy: Always
           securityContext:
             runAsGroup: 1000
             runAsUser: 1000
@@ -36,11 +37,19 @@ spec:
             - containerPort: 16261
               name: game-server
               protocol: UDP
+              hostPort: 16261
             - containerPort: 8766
               name: game-server-2
               protocol: UDP
+              hostPort: 8766
             - containerPort: 9099
               name: metrics
+              protocol: TCP
+            - containerPort: 27015
+              name: rcon
+              protocol: TCP
+            - containerPort: 7091
+              name: jmx
               protocol: TCP
           volumeMounts:
             - name: data
@@ -49,6 +58,9 @@ spec:
             - name: data
               mountPath: /home/zomboid-server/Zomboid/db
               subPath: "db"
+            - name: logs
+              mountPath: /home/zomboid-server/Zomboid/Logs
+              subPath: "Logs"
   volumeClaimTemplates:
     - metadata:
         name: data
