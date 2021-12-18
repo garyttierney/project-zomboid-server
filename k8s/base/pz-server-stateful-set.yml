@@ -58,7 +58,7 @@ spec:
             - name: data
               mountPath: /home/zomboid-server/Zomboid/db
               subPath: "db"
-            - name: logs
+            - name: data
               mountPath: /home/zomboid-server/Zomboid/Logs
               subPath: "Logs"
   volumeClaimTemplates:
