@@ -1,2 +1,2 @@
 rootProject.name = "zomboid-server"
-include("game-server-patcher")
+include("game-server-agent")

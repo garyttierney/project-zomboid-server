@@ -3,11 +3,9 @@ import org.gradle.api.JavaVersion.VERSION_11
 
 plugins {
     java
-    id ("com.github.johnrengelman.shadow") version ("7.1.0")
+    kotlin("jvm") version "1.5.31"
+    id("com.github.johnrengelman.shadow") version ("7.1.0")
 }
-
-group = "org.example"
-version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
@@ -24,8 +22,7 @@ dependencies {
     compileOnly(files(pzDirectory))
     implementation("net.bytebuddy:byte-buddy:1.12.3")
     implementation("net.bytebuddy:byte-buddy-agent:1.12.3")
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.6.0")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
+    implementation("io.javalin:javalin:4.1.1")
 }
 
 
