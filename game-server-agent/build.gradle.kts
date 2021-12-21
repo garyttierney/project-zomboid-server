@@ -23,6 +23,9 @@ dependencies {
     implementation("net.bytebuddy:byte-buddy:1.12.3")
     implementation("net.bytebuddy:byte-buddy-agent:1.12.3")
     implementation("io.javalin:javalin:4.1.1")
+    implementation("org.slf4j:slf4j-simple:1.7.31")
+    implementation("org.slf4j:slf4j-api:1.7.31")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.12.4")
 }
 
 

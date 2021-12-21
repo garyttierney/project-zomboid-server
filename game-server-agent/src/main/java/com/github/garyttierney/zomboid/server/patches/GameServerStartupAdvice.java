@@ -5,7 +5,7 @@ import com.github.garyttierney.zomboid.server.api.ZomboidApiServer;
 import net.bytebuddy.asm.Advice;
 
 public class GameServerStartupAdvice {
-    private static final ZomboidApiServer server = new ZomboidApiServer(new DefaultZomboidApiServerAdapter());
+    public static final ZomboidApiServer server = new ZomboidApiServer(new DefaultZomboidApiServerAdapter());
 
     @Advice.OnMethodEnter
     public static void before() {

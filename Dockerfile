@@ -3,12 +3,9 @@ FROM steamcmd/steamcmd:ubuntu-20 AS pz_setup
 ENV HOME=""
 ENV USER=""
 
-ENV DEBIAN_FRONTEND=noninteractive
-RUN apt-get update && apt-get install -y moreutils gettext
-
 RUN steamcmd +force_install_dir /opt/project-zomboid  \
              +login anonymous \
-             +app_update 380870 -beta b41multiplayer \
+             +app_update 380870 \
              +quit
 
 FROM gradle:latest AS agent_build
@@ -17,7 +14,7 @@ ADD ./ /home/gradle/work/
 WORKDIR /home/gradle/work
 COPY --from=pz_setup /opt/project-zomboid /opt/project-zomboid
 RUN ./gradlew -PpzDirectory=/opt/project-zomboid/java shadowJar
-RUN mv /home/gradle/work/game-server-patcher/build/libs/pz-agent.jar /opt/project-zomboid
+RUN mv /home/gradle/work/game-server-agent/build/libs/pz-agent.jar /opt/project-zomboid
 
 FROM ubuntu
 
