@@ -11,6 +11,9 @@ components:
   - ../../k8s/variants/48-players
   - ../../k8s/variants/with-metrics
 
+patchesStrategicMerge:
+  - overrrides/pz-server-service--domain.yml
+
 secretGenerator:
   - name: pz-server-secrets
     behavior: merge
