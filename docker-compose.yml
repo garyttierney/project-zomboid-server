@@ -6,11 +6,16 @@ networks:
 
 services:
   pz_32:
-    image: zomboid
+    build:
+      context: .
+      dockerfile: Dockerfile
+      cache_from:
+        - ghcr.io/garyttierney/project-zomboid-server
     ports:
       - "8766:8766/tcp"
       - "8766:8766/udp"
       - "16261:16261/udp"
+      - "8080:8080/tcp"
     restart: unless-stopped
     volumes:
       - ./data/pz_logs:/home/zomboid-server/Zomboid/Logs
