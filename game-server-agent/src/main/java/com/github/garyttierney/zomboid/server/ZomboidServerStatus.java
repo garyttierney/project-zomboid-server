@@ -9,16 +9,10 @@ import zombie.network.ServerOptions;
 
 public class ZomboidServerStatus implements ZomboidServerStatusMBean {
 
-    private int maxPlayers = 0;
     private int currentPlayers = 0;
     private int zombies = 0;
     private int loadedZombies = 0;
     private long totalTicks = 0;
-
-    @Override
-    public Integer getMaxPlayers() {
-        return maxPlayers;
-    }
 
     @Override
     public Integer getCurrentPlayers() {
@@ -41,7 +35,6 @@ public class ZomboidServerStatus implements ZomboidServerStatusMBean {
     }
 
     public void update() {
-        maxPlayers = ServerOptions.getInstance().getMaxPlayers();
         currentPlayers = GameServer.getPlayerCount();
         zombies = ServerMap.instance.ZombieMap.size();
         loadedZombies = IsoWorld.instance.getCell().getZombieList().size();
