@@ -1,19 +1,32 @@
 package com.github.garyttierney.zomboid.server.api
 
+import com.github.garyttierney.zomboid.server.metrics.ZomboidMetricsRegistry
 import io.javalin.Javalin
 import io.javalin.apibuilder.ApiBuilder.get
 import io.javalin.http.Context
+import io.javalin.plugin.metrics.MicrometerPlugin
+import io.prometheus.client.exporter.common.TextFormat
+
 
 class ZomboidApiServer(private val adapter: ZomboidApiServerAdapter) {
-
-    private val app = Javalin.create()
+    private val app: Javalin = Javalin.create() {
+        it.registerPlugin(MicrometerPlugin(ZomboidMetricsRegistry))
+    }
 
     fun stop() = app.stop()
-    fun start() = app.start()
+    fun start() = app.start(8080)
 
     init {
         app.routes {
             get("/info", ::serverInfoGet)
+            get("/metrics", ::metricsGet)
+        }
+    }
+
+    fun metricsGet(ctx: Context) {
+        ctx.apply {
+            contentType(TextFormat.CONTENT_TYPE_004)
+            result(ZomboidMetricsRegistry.scrape())
         }
     }
 

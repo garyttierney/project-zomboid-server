@@ -1,0 +1,9 @@
+<aspectj>
+    <aspects>
+        <aspect name="com.github.garyttierney.zomboid.server.patches.GameServerAspect"/>
+        <aspect name="com.github.garyttierney.zomboid.server.patches.ServerOptionsAspect"/>
+        <weaver options="-verbose -showWeaveInfo">
+            <include within="zombie.*"/>
+        </weaver>
+    </aspects>
+</aspectj>
